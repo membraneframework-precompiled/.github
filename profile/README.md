@@ -12,4 +12,10 @@ If you want to add a new package repository using the automated method (homebrew
 
 3. In the `.circleci/config.yml` file, replace `PACKAGE_NAME_HERE` with the package name (the same one that was used in the repository name).
 
-To initiate the precompilation process, push a tag matching the latest version of your package, prefixed with 'v'. You can check the latest version of the package by running `brew info <package>` or visiting `https://formulae.brew.sh/formula/<package>`. For example, to trigger the precompilation of a package with a latest version of 1.2.3, you would need to push a `v1.2.3` tag. Once the CircleCI pipeline finishes the precompilation and publishing process, a new release will be created from the pushed tag that contains the precompiled builds of the package.
+To initiate the precompilation process, push a tag matching the latest version of your package, prefixed with 'v'. You can check the latest version of the package by running `brew info <package>` or visiting `https://formulae.brew.sh/formula/<package>`. For example, to trigger the precompilation of a package with a latest version of 1.2.3, you would need to push a `v1.2.3` tag. 
+Once the CircleCI pipeline finishes the precompilation and publishing process, a new release will be created from the pushed tag that contains the precompiled builds of the package. By default there will be three archives:
+- `<package>_linux.tar.gz`
+- `<package>_macos_arm.tar.gz`
+- `<package>_macos_intel.tar.gz`
+
+Each of them will contain the package built for specified OS and architecture. Repos and releases structured this way can be further utilized by [Bundlex](https://github.com/membraneframework/bundlex) and [Membrane Precompiled Dependency Provider](https://github.com/membraneframework/membrane_precompiled_dependency_provider)
