@@ -12,11 +12,10 @@ If you want to add a new package repository using the automated method (homebrew
 
 3. In the `.circleci/config.yml` file, replace `PACKAGE_NAME_HERE` with the package name (the same one that was used in the repository name).
 
-4. On [CircleCI Project Dashboard](https://app.circleci.com/projects/project-dashboard/github/membraneframework-precompiled/) set up a new project of the package's repository.
+4. On [CircleCI Project Dashboard](https://app.circleci.com/projects/project-dashboard/github/membraneframework-precompiled/) set up a new project of the package's repository (preset **Fastest**, branch `main`).
    
-5. In the newly created project navigate to **Project Settings** > **Environment Variables** > **Import Variables** and import the `GITHUB_TOKEN` variable from any other precompiled package's repository. It can be done directly from **Import Variables**, you don't need to have the actual token.
+5. To initiate the precompilation process, push a tag matching the latest version of your package, prefixed with 'v'. You can check the latest version of the package by running `brew info <package>` or visiting `https://formulae.brew.sh/formula/<package>`. For example, to trigger the precompilation of a package with a latest version of 1.2.3, you would need to push a `v1.2.3` tag.
 
-To initiate the precompilation process, push a tag matching the latest version of your package, prefixed with 'v'. You can check the latest version of the package by running `brew info <package>` or visiting `https://formulae.brew.sh/formula/<package>`. For example, to trigger the precompilation of a package with a latest version of 1.2.3, you would need to push a `v1.2.3` tag. 
 Once the CircleCI pipeline finishes the precompilation and publishing process, a new release will be created from the pushed tag that contains the precompiled builds of the package. By default there will be two archives:
 - `<package>_linux.tar.gz`
 - `<package>_macos_arm.tar.gz`
