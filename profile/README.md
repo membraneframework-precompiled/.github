@@ -14,10 +14,12 @@ If you want to add a new package repository using the automated method (homebrew
 
 4. On [CircleCI Project Dashboard](https://app.circleci.com/projects/project-dashboard/github/membraneframework-precompiled/) set up a new project of the package's repository (preset **Fastest**, branch `main`).
    
-5. To initiate the precompilation process, push a tag matching the latest version of your package, prefixed with 'v'. You can check the latest version of the package by running `brew info <package>` or visiting `https://formulae.brew.sh/formula/<package>`. For example, to trigger the precompilation of a package with a latest version of 1.2.3, you would need to push a `v1.2.3` tag.
+5. To initiate the precompilation process, push a tag matching the latest version of your package, prefixed with 'v'. You can check the latest version of the package by running `brew info <package>` or visiting `https://formulae.brew.sh/formula/<package>`. For example, to trigger the precompilation of a package with a latest version of `1.2.3`, you would need to push a `v1.2.3` tag.
 
-Once the CircleCI pipeline finishes the precompilation and publishing process, a new release will be created from the pushed tag that contains the precompiled builds of the package. By default there will be two archives:
-- `<package>_linux.tar.gz`
+Once the CircleCI pipeline finishes the precompilation and publishing process, a new release will be created from the pushed tag that contains the precompiled builds of the package. By default the following archives will be present:
 - `<package>_macos_arm.tar.gz`
+- `<package>_linux.tar.gz`
+- `<package>_linux_x86.tar.gz`
+- `<package>_linux_arm.tar.gz`
 
-Each of them will contain the package built for specified OS and architecture. Repos and releases structured this way can be further utilized by [Bundlex](https://github.com/membraneframework/bundlex) and [Membrane Precompiled Dependency Provider](https://github.com/membraneframework/membrane_precompiled_dependency_provider)
+Each of them will contain the package built for specified OS and architecture. Repos and releases structured this way can be further utilized by [Bundlex](https://github.com/membraneframework/bundlex) and [Membrane Precompiled Dependency Provider](https://github.com/membraneframework/membrane_precompiled_dependency_provider). The `linux` archive will the same as `linux_x86` for backwards compatibility.
